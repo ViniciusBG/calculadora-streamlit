@@ -16,14 +16,13 @@ def preparing(zona,quartos,area):
     features = np.r_[zona_prep, quartos_prep, area_prep].reshape(1,-1)
     return features
 
-st.title('Calculadora de Imoveis SP')
-zona = st.selectbox('Zona', ('norte', 'sul', 'leste', 'oeste'))
-quartos = st.selectbox('Número de quartos', ('1', '2', '3', '4', '5', '6', '7', '8', '9', '10'))
-area = st.text_input('Área total')
-
-pred = st.button('Predict')
 
 def main():
+    st.title('Calculadora de Imoveis SP')
+    zona = st.selectbox('Zona', ('norte', 'sul', 'leste', 'oeste'))
+    quartos = st.selectbox('Número de quartos', ('1', '2', '3', '4', '5', '6', '7', '8', '9', '10'))
+    area = st.text_input('Área total')
+    pred = st.button('Predict')
     if pred:
         features = preparing(zona=zona,quartos=quartos,area=area)
         prediction = np.expm1(model.predict(features))
