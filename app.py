@@ -14,28 +14,6 @@ zona_to_onehot = {
 }
 
 
-def main():
-    """Creates the main function that basically displays the buttons and boxes
-    and calls the predictions after getting the inputs from the users.
-    """
-
-    st.title("São Paulo Rent Calculator")
-    # collecting the data
-    zona = st.selectbox("Zone", ("north", "south", "east", "west"))
-    quartos = st.selectbox(
-        "Number of bedrooms", ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10")
-    )
-    area = st.text_input("Total Area")
-    pred = st.button("Predict")
-
-    if pred:  # if someone cliks predict
-        # prepares the features and returns the predictions
-        features = preparing(zona=zona, quartos=quartos, area=area)
-        prediction = np.expm1(model.predict(features))
-        output = round(prediction[0], 2)
-        st.success(f"The rent value is R${output}")
-
-
 def preparing(zona, quartos, area):
     """
     Transforms the inputs collected by the interaction of the users into a
@@ -57,6 +35,29 @@ def preparing(zona, quartos, area):
     features = np.r_[zona_prep, quartos_prep, area_prep].reshape(1, -1)
 
     return features
+
+
+def main():
+    """Creates the main function that basically displays the buttons and boxes
+    and calls the predictions after getting the inputs from the users.
+    """
+
+    st.title("São Paulo Rent Calculator")
+    # collecting the data
+    zona = st.selectbox("Zone", ("north", "south", "east", "west"))
+    quartos = st.selectbox(
+        "Number of bedrooms", ("1", "2", "3", "4", "5", "6", "7", "8", "9", "10")
+    )
+    area = st.text_input("Total Area")
+    pred = st.button("Predict")
+
+    if pred:  # if someone cliks predict
+        # prepares the features and returns the predictions
+        features = preparing(zona=zona, quartos=quartos, area=area)
+        prediction = np.expm1(model.predict(features))
+        output = round(prediction[0], 2)
+
+        st.success(f"The rent value is R${output}")
 
 
 if __name__ == "__main__":
