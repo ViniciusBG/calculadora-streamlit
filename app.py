@@ -28,6 +28,7 @@ def preparing(zona, quartos, area):
         np.array : array with the moedel's input variables in right type and
         order
     """
+
     zona_prep = zona_to_onehot[zona.lower()]
     quartos_prep = np.log1p(int(quartos))
     area_prep = np.log1p(int(area))
@@ -54,8 +55,8 @@ def main():
     if pred:  # if someone cliks predict
         # prepares the features and returns the predictions
         features = preparing(zona=zona, quartos=quartos, area=area)
-        prediction = np.expm1(model.predict(features))
-        output = round(prediction[0], 2)
+        # prediction = np.expm1(model.predict(features))
+        # output = round(prediction[0], 2)
 
         st.success(f"The rent value is R${output}")
 

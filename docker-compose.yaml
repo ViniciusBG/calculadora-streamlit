@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+    inside_dev:
+        build: .
+        volumes:
+            - .:/app
+        container_name: calculator
+        tty: true
+        restart: always
+        ports:
+          - "8501:8501"
